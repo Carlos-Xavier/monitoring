@@ -324,8 +324,9 @@ def update_cat_count(n):
     if not initialized:
         initialize_if_needed()
     else: 
-        if len(yolo_deque) > 10:
+        if len(yolo_deque) > 5:
             print("O buffer da yolo acumulou muitas imagens")
+            initialized = False
         elif len(yolo_deque) > 0:
             yolo_job(yolov5, yolo_deque.popleft())
 
