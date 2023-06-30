@@ -321,14 +321,17 @@ def check_images_saved_one_minute_before(folder_path, date):
 )
 def update_cat_count(n):
     global initialized, yolov5, yolo_deque
-    if not initialized:
-        initialize_if_needed()
-    else: 
-        if len(yolo_deque) > 5:
-            print("O buffer da yolo acumulou muitas imagens")
-            initialized = False
-        elif len(yolo_deque) > 0:
-            yolo_job(yolov5, yolo_deque.popleft())
+    try:
+        if not initialized:
+            initialize_if_needed()
+        else: 
+            if len(yolo_deque) > 5:
+                print("O buffer da yolo acumulou muitas imagens")
+                initialized = False
+            elif len(yolo_deque) > 0:
+                yolo_job(yolov5, yolo_deque.popleft())
+    except:
+        pass
 
     return [None]
 
